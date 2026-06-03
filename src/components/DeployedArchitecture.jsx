@@ -35,7 +35,7 @@ export default function DeployedArchitecture() {
   useEffect(() => {
     fetch(`${API_URL}/api/projects`)
       .then(r => r.ok ? r.json() : Promise.reject())
-      .then(data => setProjects(data.map(mapProject)))
+      .then(data => setProjects(data.length ? data.map(mapProject) : FALLBACK))
       .catch(() => setProjects(FALLBACK));
   }, []);
 
