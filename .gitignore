@@ -43,4 +43,4 @@ Thumbs.db
 Desktop.ini
 
 # Claude Code local config
-.claude/settings.local.json
+.claude/

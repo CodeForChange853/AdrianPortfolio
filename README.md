@@ -4,7 +4,7 @@
 
 A personal portfolio built to communicate who I am as a developer: what I've shipped, how I think, and where I'm headed. Clean architecture, purposeful design, no fluff.
 
-**Live:** [View Portfolio](https://github.com/CodeForChange853) &nbsp;·&nbsp; **Contact:** garciaadrian1030@gmail.com
+**Live:** [View Portfolio](https://github.com/adrian-portfolio-alpha.vercel.app) &nbsp;·&nbsp; **Contact:** garciaadrian1030@gmail.com
 
 ---
 
