@@ -8,7 +8,7 @@ const TITLE = 'Tech Stack';
 
 export default function TechStack() {
   const [revealed, setRevealed] = useState(false);
-  const ref = useReveal(0, () => setRevealed(true));
+  const ref = useReveal(0, () => setRevealed(true), () => setRevealed(false));
   const titleRef = useScramble(TITLE, { duration: 520, start: revealed });
 
   return (

@@ -1,7 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 // Triggers a fade-in + word-ink animation when the element enters the viewport.
-export function useReveal(delay = 0, onReveal) {
+// Modified for reverse scroll effect (repeats animation when scrolling back).
+export function useReveal(delay = 0, onReveal, onHide) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -11,16 +12,20 @@ export function useReveal(delay = 0, onReveal) {
     if (delay) el.style.transitionDelay = `${delay}ms`;
 
     // Split .write-target text into staggered word spans for the ink effect
-    el.querySelectorAll('.write-target').forEach(textEl => {
-      const text = textEl.textContent;
-      let d = delay + 120;
-      textEl.innerHTML = text.split(/(\s+)/).map(part => {
-        if (/^\s+$/.test(part)) return part;
-        const s = `<span class="word-ink" style="transition-delay:${d}ms">${part}</span>`;
-        d += 26;
-        return s;
-      }).join('');
-    });
+    // Only do this once!
+    if (!el.dataset.splitDone) {
+      el.querySelectorAll('.write-target').forEach(textEl => {
+        const text = textEl.textContent;
+        let d = delay + 120;
+        textEl.innerHTML = text.split(/(\s+)/).map(part => {
+          if (/^\s+$/.test(part)) return part;
+          const s = `<span class="word-ink" style="transition-delay:${d}ms">${part}</span>`;
+          d += 26;
+          return s;
+        }).join('');
+      });
+      el.dataset.splitDone = "true";
+    }
 
     const obs = new IntersectionObserver(
       ([e]) => {
@@ -28,14 +33,17 @@ export function useReveal(delay = 0, onReveal) {
           el.classList.add('revealed');
           onReveal?.();
           el.querySelectorAll('.word-ink').forEach(w => w.classList.add('word-visible'));
-          obs.disconnect();
+        } else {
+          el.classList.remove('revealed');
+          onHide?.();
+          el.querySelectorAll('.word-ink').forEach(w => w.classList.remove('word-visible'));
         }
       },
       { threshold: 0.05 }
     );
     obs.observe(el);
     return () => obs.disconnect();
-  }, [delay]);
+  }, [delay, onReveal, onHide]);
 
   return ref;
 }

@@ -1,4 +1,5 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import Preloader             from './components/Preloader';
 import GalaxyBackground      from './effects/GalaxyBackground';
 import FloatingNav           from './components/FloatingNav';
 import Hero                  from './components/Hero';
@@ -30,8 +31,22 @@ function CursorGlow() {
 }
 
 export default function App() {
+  const [preloaderDone, setPreloaderDone] = useState(false);
+
+  useEffect(() => {
+    if (!preloaderDone) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [preloaderDone]);
+
   return (
     <>
+      {!preloaderDone && <Preloader onComplete={() => setPreloaderDone(true)} />}
       <CursorGlow />
       <FloatingNav />
       <GalaxyBackground />
