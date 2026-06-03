@@ -5,26 +5,43 @@ import { useReveal } from '../hooks/useReveal';
 import { PROFILE } from '../data';
 import { IconEmail, IconGitHub } from './icons';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
+
 function ContactForm() {
   const [fields, setFields] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | submitting | success | error
+  const [errorMsg, setErrorMsg] = useState('');
 
   const set = k => e => setFields(f => ({ ...f, [k]: e.target.value }));
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     const { name, email, message } = fields;
-    const sub = encodeURIComponent(`Portfolio inquiry from ${name}`);
-    const body = encodeURIComponent(`From: ${name} <${email}>\n\n${message}`);
-    window.open(`mailto:${PROFILE.email}?subject=${sub}&body=${body}`);
-    setSent(true);
+    if (!name.trim() || !email.trim() || !message.trim()) return;
+    setStatus('submitting');
+    try {
+      const res = await fetch(`${API_URL}/api/leads`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name.trim(), email: email.trim(), message: message.trim() }),
+      });
+      if (res.ok) {
+        setStatus('success');
+      } else {
+        setErrorMsg('Something went wrong. Try emailing directly.');
+        setStatus('error');
+      }
+    } catch {
+      setErrorMsg('Could not reach server. Try emailing directly.');
+      setStatus('error');
+    }
   }
 
-  if (sent) {
+  if (status === 'success') {
     return (
       <div className="cf-success">
         <span className="cf-success-mark">✓</span>
-        Your email client should have opened with the message pre-filled.
+        Message received — I&apos;ll get back to you soon.
       </div>
     );
   }
@@ -32,11 +49,14 @@ function ContactForm() {
   return (
     <form className="contact-form" onSubmit={handleSubmit} noValidate>
       <div className="cf-row">
-        <input className="cf-input" type="text" placeholder="Your name" value={fields.name} onChange={set('name')} required />
-        <input className="cf-input" type="email" placeholder="Your email" value={fields.email} onChange={set('email')} required />
+        <input className="cf-input" type="text" placeholder="Your name" value={fields.name} onChange={set('name')} required disabled={status === 'submitting'} />
+        <input className="cf-input" type="email" placeholder="Your email" value={fields.email} onChange={set('email')} required disabled={status === 'submitting'} />
       </div>
-      <textarea className="cf-textarea" placeholder="What are you working on?" value={fields.message} onChange={set('message')} rows={4} required />
-      <button className="cf-submit" type="submit">Send Message →</button>
+      <textarea className="cf-textarea" placeholder="What are you working on?" value={fields.message} onChange={set('message')} rows={4} required disabled={status === 'submitting'} />
+      {status === 'error' && <p className="cf-error">{errorMsg}</p>}
+      <button className="cf-submit" type="submit" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Sending…' : 'Send Message →'}
+      </button>
     </form>
   );
 }

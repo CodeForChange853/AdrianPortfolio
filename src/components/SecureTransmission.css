@@ -263,6 +263,17 @@
   transition: background 0.2s ease, transform 0.15s ease;
 }
 .cf-submit:hover { background: var(--accent-secondary); transform: translateY(-1px); }
+.cf-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.cf-error {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #ff6b6b;
+  padding: 8px 12px;
+  border: 0.5px solid rgba(255, 107, 107, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 107, 107, 0.05);
+}
 
 .cf-success {
   display: flex;
