@@ -12,6 +12,16 @@
   border-bottom: 0.5px solid var(--border);
 }
 
+.proj-loading {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  opacity: 0.6;
+  padding: 48px 0;
+  text-align: center;
+}
+
 .projects-header { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
 .projects-num {
   font-family: var(--font-mono);

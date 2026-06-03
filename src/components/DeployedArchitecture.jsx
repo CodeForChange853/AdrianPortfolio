@@ -1,20 +1,50 @@
 import './DeployedArchitecture.css';
-import { useState, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useReveal } from '../hooks/useReveal';
-import { PROJECTS } from '../data';
+import { PROJECTS as FALLBACK } from '../data';
 import ProjectCard from './ProjectItem';
 
+const API_URL = import.meta.env.VITE_API_URL || '';
 const FILTERS = ['ALL', 'WEB', 'APP'];
+
+function safeParse(v, fallback) {
+  try { return JSON.parse(v); } catch { return fallback; }
+}
+
+function mapProject(p) {
+  return {
+    id: p.id,
+    type: p.type || 'web',
+    name: p.title,
+    subtitle: p.subtitle || '',
+    description: p.description,
+    tags: safeParse(p.tech_stack, []),
+    live: p.live_url || null,
+    repo: p.github_url || null,
+    img: p.image || null,
+    languages: safeParse(p.languages, []),
+    stats: safeParse(p.stats, []),
+  };
+}
 
 export default function DeployedArchitecture() {
   const [filter, setFilter] = useState('ALL');
+  const [projects, setProjects] = useState(null);
   const ref = useReveal();
 
-  const webProjects = useMemo(() => PROJECTS.filter(p => p.type === 'web'), []);
-  const appProjects = useMemo(() => PROJECTS.filter(p => p.type === 'app'), []);
+  useEffect(() => {
+    fetch(`${API_URL}/api/projects`)
+      .then(r => r.ok ? r.json() : Promise.reject())
+      .then(data => setProjects(data.map(mapProject)))
+      .catch(() => setProjects(FALLBACK));
+  }, []);
+
+  const list = projects ?? [];
+  const webProjects = useMemo(() => list.filter(p => p.type === 'web'), [list]);
+  const appProjects = useMemo(() => list.filter(p => p.type === 'app'), [list]);
 
   const filteredCount = filter === 'ALL'
-    ? PROJECTS.length
+    ? list.length
     : filter === 'WEB' ? webProjects.length : appProjects.length;
 
   return (
@@ -37,11 +67,13 @@ export default function DeployedArchitecture() {
           </button>
         ))}
         <span className="proj-filter-count">
-          {filteredCount} project{filteredCount !== 1 ? 's' : ''}
+          {projects === null ? '…' : `${filteredCount} project${filteredCount !== 1 ? 's' : ''}`}
         </span>
       </div>
 
-      {filter === 'ALL' ? (
+      {projects === null ? (
+        <div className="proj-loading">Loading projects…</div>
+      ) : filter === 'ALL' ? (
         <div className="proj-all-view">
           {webProjects.length > 0 && (
             <div className="proj-type-section">
