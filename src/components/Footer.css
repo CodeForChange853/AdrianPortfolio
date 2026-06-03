@@ -1,0 +1,243 @@
+/* ── FOOTER ── */
+.footer {
+  position: relative;
+  overflow: hidden;
+  background: #000F0F;
+  padding-left: var(--nav-left);
+  border-top: 0.5px solid rgba(44, 194, 149, 0.12);
+}
+
+.footer-ghost {
+  position: absolute;
+  bottom: -8%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-ethnocentric);
+  font-size: clamp(100px, 18vw, 260px);
+  font-weight: 400;
+  color: rgba(44, 194, 149, 0.032);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
+  line-height: 1;
+  z-index: 0;
+}
+
+.footer-main {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1.2fr;
+  gap: 60px;
+  padding: 72px clamp(32px, 4vw, 72px) 60px;
+  align-items: start;
+}
+
+/* ── Brand ── */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.footer-name {
+  font-family: var(--font-ethnocentric);
+  font-size: clamp(20px, 2.6vw, 34px);
+  font-weight: 400;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+}
+.footer-name span { display: block; }
+.footer-role {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.footer-avail-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  border: 0.5px solid rgba(0, 223, 129, 0.28);
+  padding: 7px 16px;
+  border-radius: 40px;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.footer-avail-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 8px rgba(0, 223, 129, 0.65);
+  animation: hsDotPulse 2.4s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* ── Nav + Contact columns ── */
+.footer-nav-col,
+.footer-contact-col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.footer-col-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  padding-bottom: 16px;
+  border-bottom: 0.5px solid rgba(44, 194, 149, 0.12);
+}
+
+/* ── Nav column ── */
+.footer-nav-list { display: flex; flex-direction: column; gap: 13px; }
+.footer-nav-link {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+.footer-nav-link:hover { color: var(--text-primary); }
+
+/* ── Contact column ── */
+.footer-contact-links { display: flex; flex-direction: column; gap: 14px; }
+.footer-contact-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  word-break: break-all;
+}
+.footer-contact-link:hover { color: var(--accent-secondary); }
+.footer-contact-link svg { color: var(--accent-secondary); flex-shrink: 0; }
+
+.footer-back-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: none;
+  border: 0.5px solid rgba(44, 194, 149, 0.18);
+  padding: 8px 18px;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+  align-self: flex-start;
+  margin-top: 4px;
+}
+.footer-back-top:hover {
+  color: var(--accent-secondary);
+  border-color: rgba(44, 194, 149, 0.38);
+}
+
+/* ── Bottom bar ── */
+.footer-bottom {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px clamp(32px, 4vw, 72px);
+  border-top: 0.5px solid rgba(44, 194, 149, 0.08);
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+/* ── Cinematic scroll reveals ── */
+
+/* Footer reveals instantly; children own the motion */
+.footer.reveal-block {
+  transition: opacity 0.001s;
+  transform: none;
+}
+
+/* Ghost text: iris expand from bottom center */
+.footer-ghost {
+  clip-path: circle(0% at 50% 100%);
+  transition: clip-path 1.30s cubic-bezier(0.16, 1, 0.3, 1) 0.35s;
+}
+.footer.reveal-block.revealed .footer-ghost {
+  clip-path: circle(150% at 50% 100%);
+}
+
+/* Columns: perspective fold up, staggered */
+.footer-brand,
+.footer-nav-col,
+.footer-contact-col {
+  animation: footerColFold 0.70s var(--ease) both;
+  animation-play-state: paused;
+}
+.footer-brand       { animation-delay: 0.15s; }
+.footer-nav-col     { animation-delay: 0.28s; }
+.footer-contact-col { animation-delay: 0.41s; }
+.footer.reveal-block.revealed .footer-brand,
+.footer.reveal-block.revealed .footer-nav-col,
+.footer.reveal-block.revealed .footer-contact-col { animation-play-state: running; }
+
+@keyframes footerColFold {
+  from { opacity: 0; transform: perspective(600px) rotateX(22deg) translateY(18px); }
+  to   { opacity: 1; transform: perspective(600px) rotateX(0deg) translateY(0); }
+}
+
+/* Bottom bar fades in last */
+.footer-bottom {
+  animation: footerBottomIn 0.5s var(--ease) 0.55s both;
+  animation-play-state: paused;
+}
+.footer.reveal-block.revealed .footer-bottom { animation-play-state: running; }
+@keyframes footerBottomIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-ghost { clip-path: none !important; transition: none; }
+  .footer-brand, .footer-nav-col, .footer-contact-col, .footer-bottom {
+    animation: none; opacity: 1;
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 700px) {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 56px clamp(24px, 4vw, 48px) 48px;
+  }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { padding-left: clamp(24px, 4vw, 48px); padding-right: clamp(24px, 4vw, 48px); }
+}
+@media (max-width: 480px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding: 48px 20px 40px;
+  }
+  .footer-brand { grid-column: auto; }
+  .footer-bottom {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+    padding: 16px 20px;
+  }
+}

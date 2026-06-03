@@ -1,0 +1,22 @@
+{
+  "name": "adrianportfolio",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.2",
+    "playwright": "^1.60.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.19.4",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6"
+  }
+}

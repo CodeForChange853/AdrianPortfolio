@@ -1,0 +1,292 @@
+/* ══════════════════════════════════════════════════════════════
+   ABOUT SECTION (SystemSpecs)
+══════════════════════════════════════════════════════════════ */
+.about-section {
+  position: relative;
+  z-index: var(--z-content);
+  padding: clamp(48px, 6vh, 96px) clamp(24px, 4vw, 80px);
+  padding-left: var(--nav-left);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+/* ── Section header ── */
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+.about-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  color: var(--accent-secondary);
+  opacity: 0.70;
+  flex-shrink: 0;
+}
+.about-title {
+  font-family: var(--font-ethnocentric);
+  font-size: clamp(18px, 2.6vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.about-header-line {
+  flex: 1;
+  height: 0.5px;
+  background: linear-gradient(to right, rgba(44, 194, 149, 0.30), transparent);
+}
+
+/* ── Top row ── */
+.about-top {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 20px;
+}
+
+/* ── Bio card ── */
+.about-bio-card {
+  background: rgba(3, 34, 33, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0.5px solid rgba(44, 194, 149, 0.18);
+  border-radius: 20px;
+  padding: 32px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(44, 194, 149, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.about-bio-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(44, 194, 149, 0.35) 50%, transparent);
+  pointer-events: none;
+}
+.abc-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  border: 0.5px solid rgba(44, 194, 149, 0.28);
+  padding: 4px 12px;
+  border-radius: 40px;
+  align-self: flex-start;
+}
+.abc-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.90;
+  color: var(--text-secondary);
+  font-weight: 300;
+  flex: 1;
+}
+.abc-footer {
+  display: flex;
+  gap: 14px;
+  padding-top: 14px;
+  border-top: 0.5px solid rgba(44, 194, 149, 0.10);
+}
+.abc-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(170, 203, 196, 0.55);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.abc-link:hover { color: var(--accent-secondary); }
+
+/* ── Quick facts card ── */
+.about-facts-card {
+  background: rgba(3, 34, 33, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 0.5px solid rgba(44, 194, 149, 0.18);
+  border-radius: 20px;
+  padding: 28px 28px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(44, 194, 149, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+.about-facts-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(44, 194, 149, 0.35) 50%, transparent);
+  pointer-events: none;
+}
+.afc-header { margin-bottom: 22px; }
+.afc-title {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.20em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  border: 0.5px solid rgba(44, 194, 149, 0.28);
+  padding: 4px 12px;
+  border-radius: 40px;
+}
+.afc-list { display: flex; flex-direction: column; gap: 0; flex: 1; }
+.afc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 13px 0;
+  border-bottom: 0.5px solid rgba(44, 194, 149, 0.07);
+}
+.afc-item:last-child { border-bottom: none; padding-bottom: 0; }
+.afc-icon {
+  color: var(--accent-secondary);
+  opacity: 0.70;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex;
+}
+.afc-content { display: flex; flex-direction: column; gap: 3px; }
+.afc-label {
+  font-family: var(--font-mono);
+  font-size: 8px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.afc-value {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-weight: 300;
+  line-height: 1.4;
+}
+
+/* ── Hobbies strip ── */
+.about-hobbies {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ahc-item {
+  background: rgba(3, 34, 33, 0.50);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 0.5px solid rgba(44, 194, 149, 0.14);
+  border-radius: 16px;
+  padding: 24px 22px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+.ahc-item:hover {
+  border-color: rgba(44, 194, 149, 0.28);
+  background: rgba(3, 34, 33, 0.72);
+}
+.ahc-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(44, 194, 149, 0.08);
+  border: 0.5px solid rgba(44, 194, 149, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-secondary);
+  flex-shrink: 0;
+}
+.ahc-body { display: flex; flex-direction: column; gap: 5px; padding-top: 2px; }
+.ahc-title {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+.ahc-desc {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+
+/* ── Cinematic scroll reveals ── */
+
+/* Section reveals instantly so children own the motion */
+.about-section.reveal-block {
+  transition: opacity 0.001s;
+  transform: none;
+}
+
+/* Bio slides in from left */
+.about-bio-card {
+  animation: aboutBioIn 0.80s var(--ease) 0.06s both;
+  animation-play-state: paused;
+}
+/* Facts slides in from right, slight delay */
+.about-facts-card {
+  animation: aboutFactsIn 0.80s var(--ease) 0.18s both;
+  animation-play-state: paused;
+}
+.reveal-block.revealed .about-bio-card  { animation-play-state: running; }
+.reveal-block.revealed .about-facts-card { animation-play-state: running; }
+
+@keyframes aboutBioIn {
+  from { opacity: 0; transform: translateX(-38px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes aboutFactsIn {
+  from { opacity: 0; transform: translateX(38px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Hobbies: perspective fold-in with spring bounce */
+.about-hobbies { perspective: 900px; }
+.ahc-item {
+  animation: ahcFoldIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-play-state: paused;
+}
+.ahc-item:nth-child(1) { animation-delay: 0.44s; }
+.ahc-item:nth-child(2) { animation-delay: 0.56s; }
+.ahc-item:nth-child(3) { animation-delay: 0.68s; }
+.reveal-block.revealed .ahc-item { animation-play-state: running; }
+
+@keyframes ahcFoldIn {
+  from { opacity: 0; transform: rotateX(-22deg) translateY(18px); }
+  to   { opacity: 1; transform: rotateX(0deg) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-bio-card, .about-facts-card { animation: none; opacity: 1; }
+  .ahc-item { animation: none; opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .about-top { grid-template-columns: 1fr; }
+  .about-facts-card { padding: 24px; }
+  .about-hobbies { grid-template-columns: 1fr; gap: 12px; }
+}
+@media (max-width: 480px) {
+  .about-section  { padding: 36px 16px; }
+  .about-bio-card { padding: 24px 20px; }
+}

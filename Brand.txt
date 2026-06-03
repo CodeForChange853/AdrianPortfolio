@@ -1,0 +1,70 @@
+Primary Brand Colors (Recommended Core Identity)
+
+These should define your portfolio’s personality.
+
+Role	Color	Hex
+Primary Dark / Background	Rich Black	#000F0F
+Secondary Background	Dark Green	#032221
+Main Brand Color	Bangladesh Green	#03624C
+Accent / Interactive	Mountain Meadow	#2CC295
+Highlight / CTA	Caribbean Green	#00DF81
+Neutral Light	Anti-Flash White	#F1F7F6
+Visual hierarchy
+
+#000F0F → #032221 → #03624C → #2CC295 → #00DF81
+
+This gives a premium, modern, futuristic, developer/designer aesthetic.
+
+Secondary Supporting Colors
+
+Use these for cards, hover states, subtle sections, badges, charts, borders, etc.
+
+Color Name	Hex
+Pine	#063028
+Basil	#0B453A
+Forest	#095544
+Frog	#17876D
+Mint	#2FA98C
+Stone	#707D7D
+Pistachio	#AACBC4
+My recommendation for your Portfolio Brand System
+
+Since you want a professional + futuristic portfolio:
+
+1. Background System
+Background Main: #000F0F
+Surface/Card: #032221
+Section Alt: #063028
+2. Brand Accent System
+Primary Accent: #00DF81
+Secondary Accent: #2CC295
+Hover State: #2FA98C
+3. Typography
+Main Text: #F1F7F6
+Secondary Text: #AACBC4
+Muted Text: #707D7D
+4. Buttons
+
+Primary CTA
+
+background: #00DF81;
+color: #000F0F;
+
+Secondary Button
+
+background: transparent;
+border: 1px solid #2CC295;
+color: #F1F7F6;
+
+Hover
+
+background: #2CC295;
+Suggested Brand Personality
+
+This palette communicates:
+
+Premium / modern developer portfolio
+Futuristic & cinematic
+Tech + UI/UX identity
+Clean cyber-green aesthetic
+Professional without looking overly neon

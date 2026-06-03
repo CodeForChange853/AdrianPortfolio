@@ -1,0 +1,215 @@
+/* ══════════════════════════════════════════════════════════════
+   TECH STACK SECTION
+══════════════════════════════════════════════════════════════ */
+.skills-section {
+  position: relative;
+  z-index: var(--z-content);
+  padding: clamp(48px, 6vh, 96px) clamp(24px, 4vw, 80px);
+  padding-left: var(--nav-left);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  border-bottom: 0.5px solid var(--border);
+}
+
+.skills-header { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+.skills-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.20em;
+  color: var(--accent-secondary);
+  opacity: 0.70;
+  flex-shrink: 0;
+}
+.skills-title {
+  font-family: var(--font-ethnocentric);
+  font-size: clamp(18px, 2.6vw, 32px);
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.skills-header-line {
+  flex: 1;
+  height: 0.5px;
+  background: linear-gradient(to right, rgba(44, 194, 149, 0.30), transparent);
+}
+.skills-body { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ── Core Mastery card ── */
+.smc-card {
+  background: rgba(3, 34, 33, 0.65);
+  border: 0.5px solid rgba(44, 194, 149, 0.18);
+  border-radius: 16px;
+  padding: clamp(24px, 3vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+}
+.smc-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 180px; height: 180px;
+  background: radial-gradient(circle at top right, rgba(0, 223, 129, 0.06), transparent 70%);
+  pointer-events: none;
+}
+.smc-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+  border: 0.5px solid rgba(0, 223, 129, 0.28);
+  padding: 5px 14px;
+  border-radius: 40px;
+  align-self: flex-start;
+}
+.smc-bars  { display: flex; flex-direction: column; gap: 22px; }
+.smc-row   { display: flex; flex-direction: column; gap: 9px; }
+.smc-label-row { display: flex; justify-content: space-between; align-items: center; }
+.smc-name  { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--text-primary); }
+.smc-pct   { font-family: var(--font-mono); font-size: 11px; color: var(--accent-secondary); }
+.smc-track {
+  height: 3px;
+  background: rgba(44, 194, 149, 0.10);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.smc-fill {
+  height: 100%;
+  width: var(--pct, 0%);
+  background: linear-gradient(90deg, var(--accent-secondary), var(--accent-primary));
+  border-radius: 2px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1s var(--ease);
+}
+.reveal-block.revealed .smc-fill { transform: scaleX(1); }
+.smc-bars .smc-row:nth-child(1) .smc-fill { transition-delay: 0.15s; }
+.smc-bars .smc-row:nth-child(2) .smc-fill { transition-delay: 0.27s; }
+.smc-bars .smc-row:nth-child(3) .smc-fill { transition-delay: 0.39s; }
+.smc-bars .smc-row:nth-child(4) .smc-fill { transition-delay: 0.51s; }
+
+/* ── Full Stack card ── */
+.ssc-card {
+  background: rgba(3, 34, 33, 0.35);
+  border: 0.5px solid rgba(44, 194, 149, 0.14);
+  border-radius: 16px;
+  padding: clamp(24px, 3vw, 48px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+.ssc-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle at bottom left, rgba(44, 194, 149, 0.04), transparent 70%);
+  pointer-events: none;
+}
+.ssc-tag {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  border: 0.5px solid rgba(44, 194, 149, 0.28);
+  padding: 5px 14px;
+  border-radius: 40px;
+  align-self: flex-start;
+}
+.ssc-grid  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px 28px; }
+.ssc-group { display: flex; flex-direction: column; gap: 9px; }
+.ssc-cat {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  opacity: 0.65;
+}
+.ssc-tags  { display: flex; flex-wrap: wrap; gap: 6px; }
+.ssc-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: rgba(44, 194, 149, 0.05);
+  border: 0.5px solid rgba(44, 194, 149, 0.14);
+  border-radius: 6px;
+  padding: 4px 10px;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.ssc-badge:hover {
+  color: var(--text-secondary);
+  border-color: rgba(44, 194, 149, 0.30);
+  background: rgba(44, 194, 149, 0.08);
+}
+
+/* ── Cinematic scroll reveals ── */
+
+/* Section reveals instantly; cards own the motion */
+.skills-section.reveal-block {
+  transition: opacity 0.001s;
+  transform: none;
+}
+
+/* Core Mastery: slides from left with perspective tilt */
+.smc-card {
+  animation: smcSlideIn 0.82s var(--ease) 0.10s both;
+  animation-play-state: paused;
+}
+/* Full Stack: slides from right with perspective tilt */
+.ssc-card {
+  animation: sscSlideIn 0.82s var(--ease) 0.22s both;
+  animation-play-state: paused;
+}
+.reveal-block.revealed .smc-card { animation-play-state: running; }
+.reveal-block.revealed .ssc-card { animation-play-state: running; }
+
+@keyframes smcSlideIn {
+  from { opacity: 0; transform: perspective(700px) rotateY(8deg) translateX(-32px); }
+  to   { opacity: 1; transform: perspective(700px) rotateY(0deg) translateX(0); }
+}
+@keyframes sscSlideIn {
+  from { opacity: 0; transform: perspective(700px) rotateY(-8deg) translateX(32px); }
+  to   { opacity: 1; transform: perspective(700px) rotateY(0deg) translateX(0); }
+}
+
+/* Skill groups stagger in after card appears */
+.ssc-group {
+  animation: groupFadeUp 0.45s var(--ease) both;
+  animation-play-state: paused;
+}
+.ssc-group:nth-child(1) { animation-delay: 0.56s; }
+.ssc-group:nth-child(2) { animation-delay: 0.68s; }
+.ssc-group:nth-child(3) { animation-delay: 0.80s; }
+.ssc-group:nth-child(4) { animation-delay: 0.92s; }
+.reveal-block.revealed .ssc-group { animation-play-state: running; }
+
+@keyframes groupFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .smc-card, .ssc-card, .ssc-group { animation: none; opacity: 1; }
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .skills-body { grid-template-columns: 1fr; }
+  .ssc-grid    { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .skills-section { padding: clamp(36px, 5vh, 72px) 16px; }
+  .ssc-grid       { grid-template-columns: 1fr; }
+}

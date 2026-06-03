@@ -1,0 +1,139 @@
+/* ══════════════════════════════════════════════════════════════
+   GALAXY BACKGROUND — CSS-only, zero canvas, GPU compositor
+══════════════════════════════════════════════════════════════ */
+
+.galaxy-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  /* Deep space base — three depth zones baked into background */
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 20%,  rgba(3, 98, 76, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 40% at 82% 68%,  rgba(6, 48, 40, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 90% 55% at 50% 100%, rgba(3, 34, 33, 0.28) 0%, transparent 58%),
+    #000F0F;
+}
+
+/* Three offset dot grids — different sizes and positions so they don't align,
+   producing an organic star-field without any JS */
+.galaxy-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, rgba(241, 247, 246, 0.18) 1px, transparent 1px),
+    radial-gradient(circle, rgba(44, 194, 149, 0.12)  1px, transparent 1px),
+    radial-gradient(circle, rgba(172, 203, 196, 0.10) 1.5px, transparent 1.5px);
+  background-size:
+    80px 80px,
+    120px 90px,
+    200px 160px;
+  background-position:
+    0 0,
+    35px 48px,
+    80px 100px;
+}
+
+/* ── NEBULA LAYERS (parallax wrapper) ── */
+.nebula-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ── NEBULA CLOUDS ── */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.nebula-1 {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  left: -100px;
+  background: radial-gradient(circle, rgba(3, 98, 76, 0.18) 0%, transparent 70%);
+  animation: nebulaFloat1 55s ease-in-out infinite alternate;
+}
+
+.nebula-2 {
+  width: 500px;
+  height: 500px;
+  top: 30%;
+  right: -80px;
+  background: radial-gradient(circle, rgba(44, 194, 149, 0.14) 0%, rgba(6, 48, 40, 0.08) 40%, transparent 70%);
+  animation: nebulaFloat2 48s ease-in-out infinite alternate;
+}
+
+.nebula-3 {
+  width: 700px;
+  height: 400px;
+  bottom: 10%;
+  left: 20%;
+  background: radial-gradient(ellipse, rgba(3, 98, 76, 0.14) 0%, transparent 65%);
+  animation: nebulaFloat3 62s ease-in-out infinite alternate;
+}
+
+.nebula-4 {
+  width: 400px;
+  height: 600px;
+  top: 50%;
+  right: 10%;
+  background: radial-gradient(circle, rgba(6, 48, 40, 0.20) 0%, transparent 70%);
+  animation: nebulaFloat4 45s ease-in-out infinite alternate;
+}
+
+@keyframes nebulaFloat1 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(40px, 30px) scale(1.08); }
+}
+
+@keyframes nebulaFloat2 {
+  from { transform: translate(0, 0) rotate(0deg); }
+  to   { transform: translate(-35px, 45px) rotate(5deg); }
+}
+
+@keyframes nebulaFloat3 {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(50px, -20px) scale(1.05); }
+}
+
+@keyframes nebulaFloat4 {
+  from { transform: translate(0, 0); }
+  to   { transform: translate(-25px, 35px); }
+}
+
+/* ── PLASMA OVERLAY ── */
+.plasma-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 15, 15, 0.4) 0%,
+    rgba(3, 34, 33, 0.3) 40%,
+    rgba(3, 98, 76, 0.08) 70%,
+    rgba(0, 15, 15, 0.4) 100%
+  );
+  animation: plasmaShift 20s ease-in-out infinite alternate;
+}
+
+@keyframes plasmaShift {
+  from { opacity: 0.6; }
+  to   { opacity: 1.0; }
+}
+
+/* ── CONTAINED VARIANT (inside a card) ── */
+.galaxy-bg--contained {
+  position: absolute;
+  z-index: 0;
+}
+
+/* ── REDUCED MOTION ── */
+@media (prefers-reduced-motion: reduce) {
+  .nebula,
+  .plasma-overlay { animation: none; }
+}
